@@ -15,17 +15,30 @@
 <script type="text/babel">
     
     function App(){
-        const [min,setMin] = React.useState();
-        const [hr,setHr] = React.useState();
-        const onChange = () => { console.log("Someone had written!");}
+        const [min,setMin] = React.useState(0);
+        const [hr,setHr] = React.useState(0);
+        const onChange = (event) => {
+            const minVal = event.target.value;
+            setMin(minVal);
+            setHr(Math.floor(minVal/60));
+        }
+        const reset = () => {
+            setHr(0);
+            setMin(0);
+        }
         return(
-            <div>
+            <>
                 <h3>Super Converter</h3>
-                <label htmlFor="min">Minutes</label>
-                <input value={min} id="min" placeholder="Minutes" type="number" onChange={onChange} />
-                <label htmlFor="hr" >Hours</label>
-                <input value={hr} id="hr" placeholder="Hours" type="number" />
+                <div>
+                    <label htmlFor="min">Minutes</label>
+                    <input value={min} id="min" placeholder="Minutes" type="number" onChange={onChange} />
                 </div>
+                <div>
+                    <label htmlFor="hr" >Hours</label>
+                    <input value={`${hr} hour and ${min%60}  minute`} id="hr" placeholder="Hours" type="text" />
+                </div>
+                <button onClick={reset}>Reset</button>
+            </>
                 ); 
             }
             const root = document.getElementById("root");
