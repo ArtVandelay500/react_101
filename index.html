@@ -43,21 +43,40 @@
                 ); 
             }
     function K2M(){
+        const [distance,setDistance] = React.useState(0);
+        const reset = () => {}
+        const invert = () => {}
+        const onChange = (e) => {
+            const disVal = e.target.value;
+            setDistance(disVal);
+        }
         return(
             <div>
                 <div>
                     <label htmlFor="km">Km</label>
-                    <input id="km" placeholder="킬로미터"/>
+                    <input
+                    value={distance}
+                    onChange={onChange}
+                    id="km" 
+                    type="number"
+                    placeholder="킬로미터"/>
                 </div>
                 <div>
                     <label htmlFor="miles">Miles</label>
-                    <input id="miles" placeholder="마일"/>
+                    <input
+                    value={Math.round(distance/1.609)}
+                    id="miles"
+                    type="number"
+                    placeholder="마일"
+                    disabled={invert}/>
                 </div>
+                <button onClick={reset}>Reset</button>
+                <button onClick={invert}>Invert</button>
             </div>
         );
     }
     function App(){
-        const [index,setIndex] = React.useState("0");
+        const [index,setIndex] = React.useState("1");
         const onSelect = (event) => {
             setIndex(event.target.value);
         }
