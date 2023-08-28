@@ -13,145 +13,26 @@
 <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
-    function Greeting(){
-        return(
-            <>
-            <h2>Please Select Your Option</h2>
-            </>
-        );
-    }
-    function K2P(){
-        const [weight,setWeight] = React.useState("");
-        const [invert,setInvert] = React.useState(false);
-        const onInvert = () => {
-            reset();
-            setInvert(current => !current);
-        }
-        const onChange = (e) => {
-            setWeight(e.target.value);
-        }
-        const reset = () => {
-            setWeight("");
-        } 
-        return(
-            <div>
-                <div>
-                    <label htmlFor="kg">kg</label>
-                    <input 
-                        value={!invert ? weight : Math.round(weight/2.20462262185)}
-                        id="kg" placeholder ="킬로그램" type="number"
-                        onChange={onChange}
-                        disabled={invert}
-                        />
-                </div>
-                <div>
-                    <label htmlFor="lbs">lbs</label>
-                    <input 
-                        value={!invert ? Math.round(weight*2.20462262185) : weight}
-                        id="lbs" placeholder="파운드" type="number"
-                        onChange={onChange}
-                        disabled={!invert}
-                        />
-                </div>
-                <button onClick={reset}>Reset</button>
-                <button onClick={onInvert}>Invert</button>
-            </div>
-        );
-    }
-    function M2H(){
-        const [time,setTime] = React.useState(0);
-        const [invert,setInvert] = React.useState(false)
-        const onChange = (event) => {
-            const timeVal = event.target.value;
-            setTime(timeVal);
-        }
-        const reset = () => {
-            setTime(0);
-        }
-        const oninvert = () => {
-            reset();
-            setInvert(current => (!current));
-        }
-        return(
-            <div>
-                <div>
-                    <label htmlFor="min">Minutes</label>
-                    <input value={!invert ? time : time*60} id="min" placeholder="Minutes" type="number" onChange={onChange} disabled={invert}/>
-                </div>
-                <div>
-                    <label htmlFor="hr" >Hours</label>
-                    <input value={!invert ? Math.round(time/60) : time} id="hr" placeholder="Hours" type="number" disabled={!invert} onChange={onChange} />
-                </div>
-                <button onClick={reset}>Reset</button>
-                <button onClick={oninvert}>invert</button>
-                </div>
-                ); 
-            }
-    function K2M(){
-        const [distance,setDistance] = React.useState(0);
-        const [invert,setInvert] = React.useState(false);
-        const  onInvert= () => {
-            reset();
-            setInvert(current => !current);
-        }
-        const reset = () => {
-            setDistance(0);
-        }
-        const onChange = (e) => {
-            const disVal = e.target.value;
-            setDistance(disVal);
-        }
-        return(
-            <div>
-                <div>
-                    <label htmlFor="km">Km</label>
-                    <input
-                    value={!invert ? distance : Math.round(distance*1.609)}
-                    onChange={onChange}
-                    id="km" 
-                    type="number"
-                    placeholder="킬로미터"
-                    disabled={invert}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="miles">Miles</label>
-                    <input
-                    value={!invert ? Math.round(distance/1.609): distance}
-                    id="miles"
-                    type="number"
-                    placeholder="마일"
-                    onChange={onChange}
-                    disabled={!invert}/>
-                </div>
-                <button onClick={reset}>Reset</button>
-                <button onClick={onInvert}>Invert</button>
-            </div>
-        );
-    }
-    function App(){
-        const [index,setIndex] = React.useState("");
-        const onSelect = (event) => {
-            setIndex(event.target.value);
-        }
-        return(
-            <>
-                <h3>Super Converter</h3>
-            <select value={index} onChange={onSelect}>
-                <option value="">Please select our services</option>
-                <option value="0">Minutes & Hours</option>
-                <option value="1">Kilometers & Miles</option>
-                <option value="2">Kilograms & Pounds</option>
-            </select>
-            <hr/>
+   
 
-            {index === "" ? <Greeting /> : null}
-            {index === "0" ? <M2H /> : null}
-            {index === "1" ? <K2M /> : null}
-            {index === "2" ? <K2P /> : null}
-            </>
-                ); 
-            }
+    function Btn({text}){
+        return <button style={{
+            backgroundColor : "tomato",
+            color : "white",
+            padding: "10px 20px",
+            border : "none",
+            borderRadius :"10px"
+        }}>{text}</button>;
+    }
+       
+    function App(){
+        return(
+            <div>
+                <Btn text="Save Changes"/>
+                <Btn text="Confirm"/>
+            </div>
+        ); 
+    }
             const root = document.getElementById("root");
             ReactDOM.render(<App/>,root);
 </script>
