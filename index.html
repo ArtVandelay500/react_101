@@ -13,31 +13,67 @@
 <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
-    
-    function App(){
-        const [min,setMin] = React.useState(0);
-        const [hr,setHr] = React.useState(0);
+    function M2H(){
+        const [time,setTime] = React.useState(0);
+        const [invert,setInvert] = React.useState(false)
         const onChange = (event) => {
-            const minVal = event.target.value;
-            setMin(minVal);
-            setHr(Math.floor(minVal/60));
+            const timeVal = event.target.value;
+            setTime(timeVal);
         }
         const reset = () => {
-            setHr(0);
-            setMin(0);
+            setTime(0);
+        }
+        const oninvert = () => {
+            reset();
+            setInvert(current => (!current));
+        }
+        return(
+            <div>
+                <div>
+                    <label htmlFor="min">Minutes</label>
+                    <input value={!invert ? time : time*60} id="min" placeholder="Minutes" type="number" onChange={onChange} disabled={invert}/>
+                </div>
+                <div>
+                    <label htmlFor="hr" >Hours</label>
+                    <input value={!invert ? Math.round(time/60) : time} id="hr" placeholder="Hours" type="number" disabled={!invert} onChange={onChange} />
+                </div>
+                <button onClick={reset}>Reset</button>
+                <button onClick={oninvert}>invert</button>
+                </div>
+                ); 
+            }
+    function K2M(){
+        return(
+            <div>
+            <h4>This is just a temporary</h4>
+            </div>
+        );
+    }
+    function App(){
+        const [] = React.useState(0);
+        const [time,setTime] = React.useState(0);
+        const [invert,setInvert] = React.useState(false)
+        const onChange = (event) => {
+            const timeVal = event.target.value;
+            setTime(timeVal);
+        }
+        const reset = () => {
+            setTime(0);
+        }
+        const oninvert = () => {
+            reset();
+            setInvert(current => (!current));
+        }
+        const onSelect = (event) => {
+            console.log(event)
         }
         return(
             <>
                 <h3>Super Converter</h3>
-                <div>
-                    <label htmlFor="min">Minutes</label>
-                    <input value={min} id="min" placeholder="Minutes" type="number" onChange={onChange} />
-                </div>
-                <div>
-                    <label htmlFor="hr" >Hours</label>
-                    <input value={`${hr} hour and ${min%60}  minute`} id="hr" placeholder="Hours" type="text" />
-                </div>
-                <button onClick={reset}>Reset</button>
+            <select onChange={onSelect}>
+                <option value="0">Minutes & Hours</option>
+                <option value="1">Kilometers & Miles</option>
+            </select>
             </>
                 ); 
             }
